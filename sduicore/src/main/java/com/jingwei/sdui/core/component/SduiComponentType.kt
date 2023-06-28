@@ -9,5 +9,7 @@ enum class SduiComponentType {
     IMAGE,
     ICON,
     BUTTON,
-    SPACER
+    SPACER,
+    LAZY_COLUMN,
+    LAZY_ROW
 }

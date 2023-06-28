@@ -16,6 +16,7 @@ abstract class SduiTypedObjectDeserializer<R, T : Enum<T>>(private val typeClass
         context: JsonDeserializationContext
     ): R {
         val jsonObject = json.asJsonObject
+        if (!jsonObject.has(TYPE_KEY)) throw IllegalArgumentException("type is required for $json")
         val value = jsonObject.get(TYPE_KEY).asString
         val type: T = convertToEnum(value)
 
@@ -26,7 +27,7 @@ abstract class SduiTypedObjectDeserializer<R, T : Enum<T>>(private val typeClass
         return try {
             java.lang.Enum.valueOf(typeClass, value)
         } catch (e: IllegalArgumentException) {
-            throw IllegalArgumentException("${typeClass.simpleName} has not been added on client")
+            throw IllegalArgumentException("$value has not been added on client")
         }
     }
 

@@ -1,5 +1,6 @@
 package com.jingwei.sdui.ui.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jingwei.sdui.core.component.SduiComponent
@@ -23,6 +24,7 @@ class HomeViewModel @Inject constructor(private val repository: SduiRepository):
                 val sduiResult = repository.getHomeFeed()
                 _uiState.value = _uiState.value.copy(content = sduiResult)
             } catch (e: Exception) {
+                Log.e("Error", e.stackTraceToString())
             }
         }
     }
